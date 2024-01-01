@@ -1,0 +1,172 @@
+@forward 'base/index';
+@use 'util/index';
+
+// Method 1
+$colors: (
+  color1: red,
+  color2: green,
+  $color3: blue,
+);
+// Method 2
+// @each $color in red, green, blue {
+@each $key, $color in $colors {
+  .#{$color}-text {
+    color: $color;
+  }
+}
+
+header {
+  background-color: index.$header-color;
+  padding: 1rem;
+}
+@mixin para-style {
+  font-size: 16px;
+  text-align: justify;
+}
+#about p {
+  @include para-style;
+}
+
+@mixin setFontSize($value) {
+  @if $value == small {
+    font-size: 12px;
+  } @else if $value == medium {
+    font-size: 16px;
+  } @else if $value == large {
+    font-size: 20px;
+  } @else {
+    font-size: 10px;
+  }
+}
+
+.btn {
+  border: none;
+  padding: 10px 25px;
+  margin-top: 10px;
+  text-align: center;
+  @include setFontSize(medium);
+  cursor: pointer;
+  color: white;
+}
+.btn-download {
+  @extend .btn;
+  background-color: black;
+}
+.btn-learnmore {
+  @extend .btn;
+  background-color: green;
+}
+
+@mixin edu-style($f-size, $p-align) {
+  font-size: $f-size;
+  text-align: $p-align;
+}
+#education p {
+  @include edu-style(20px, justify);
+}
+// Nav SCSS Nesting Styling
+nav {
+  margin-top: 15px;
+  ul {
+    list-style-type: none;
+    li {
+      display: inline-block;
+      margin: 0 15px;
+      a {
+        display: inline-block;
+        color: index.$menu-color;
+        text-decoration: none;
+        padding: 10px;
+        transition: 0.04s;
+        border-radius: 5px;
+      }
+      a:hover {
+        background: index.$footer-color;
+        color: index.$white-color;
+      }
+    }
+  }
+}
+#about {
+  background-color: index.$about-color;
+  padding: 2rem;
+}
+#education {
+  background-color: index.$about-color;
+  padding: 2rem;
+}
+#tutorial {
+  background-color: index.$about-color;
+  padding: 2rem;
+}
+footer {
+  background-color: index.$footer-color;
+  p {
+    color: index.$white-color;
+    padding: 0.5rem;
+  }
+}
+
+[class*='col-'] {
+  float: left;
+}
+
+//For Loop
+// to = Not going to End of the Number
+// through = going to End of the Number
+// @for $i from 1 through 12 {
+//   .col-#{$i} {
+//     width: 100% / 12 * $i;
+//   }
+// }
+
+// While Loop
+$i: 1;
+@while $i < 13 {
+  .col-#{$i} {
+    width: 100% / 12 * $i;
+  }
+  $i: $i + 1;
+}
+
+// .col-1 {
+//   width: 8.33%;
+// }
+// .col-2 {
+//   width: 16.66%;
+// }
+// .col-3 {
+//   width: 25%;
+// }
+// .col-4 {
+//   width: 33.33%;
+// }
+// .col-5 {
+//   width: 41.66%;
+// }
+// .col-6 {
+//   width: 50%;
+// }
+// .col-7 {
+//   width: 58.33%;
+// }
+// .col-8 {
+//   width: 66.66%;
+// }
+// .col-9 {
+//   width: 75%;
+// }
+// .col-10 {
+//   width: 83.33%;
+// }
+// .col-11 {
+//   width: 91.66%;
+// }
+// .col-12 {
+//   width: 100%;
+// }
+.row::after {
+  clear: both;
+  content: '';
+  display: table;
+}
