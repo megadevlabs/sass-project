@@ -1,0 +1,17 @@
+@forward 'base/index';
+@use 'util/index';
+header {
+  background-color: index.$header-color;
+  padding: 1rem;
+}
+#about {
+  background-color: index.$about-color;
+  padding: 1rem;
+}
+footer {
+  background-color: index.$footer-color;
+  p {
+    color: white;
+    padding: 0.5rem;
+  }
+}
